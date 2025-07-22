@@ -110,3 +110,116 @@ Git blame <file> - Shows who last changed each line and its super useful for deb
 
 Git reflog - Shows every head momvement even stuff that were deleted - if you accidentally nuked the branch or did a bad rebase, reflog can help recover it on occassions. 
 
+
+Git vs Github
+---
+
+<img width="1850" height="858" alt="image" src="https://github.com/user-attachments/assets/801de27d-d207-4da7-a96c-a9eb48a285b7" />
+
+Essentially the difference between the 2 is that Git runs locally on your machine and you make changes to your repo offline without having to touch the internet.
+
+Git is the actual verstion control tool that you use to make changes on Github or Git lab.
+
+Whereas Github is a platform which is a cloud service and it hosts your repo online so you can collaborate with others. - You can open pull requests, review code and automate ci/cd pipelines like github actions 
+
+So to break it down:
+
+Git runs locally - Github runs on the cloud (internet)
+
+Git tracks your history and Github helps teams collborate
+
+Github can be swapped with Github, Gitlab, bitbucket, Azure devops whereas Git is the foundation that is used within these platforms.
+
+
+Branching 
+---
+
+Branching is one gits most powerful features as it lets you work on multiple things at once without messing up the main project. - basically add a new branch to the tree to maybe test the bug that was fixed or test a new feature
+
+***Branching commands*** 
+git branch - this shows a list of a branches that you currently have and makes branches
+
+git checkout -b <branchname> - Old way of swithing to a new branch in one go 
+
+git switch -c <branchname> - The mordern way of doing the above
+
+Git switch <branchname> - switching to an existing branch 
+
+git branch -d <branchname> - Basically delete a branch but git can stop you if that branch hasn't been merged yet just to be safe
+
+<img width="1437" height="798" alt="image" src="https://github.com/user-attachments/assets/69447c79-3c01-451c-9cd0-f1b8c0e3368a" />
+
+
+Merging 
+---
+
+This comes to play when you're done working with a branch and want to bring those changes back into another branch. - merging combines changes from one branch to another
+
+There can be issues with merging when both branches have diverged meaning the commits on the main and the added on branch are different, git can do a recursive merge or true merge
+
+This true merge or recursive merge creates a merge commit that ties both historys together however, if the same files were edited on both sides then a merge conflict would occur
+
+The merge conflict could only be fixed manually.
+
+<img width="1621" height="973" alt="image" src="https://github.com/user-attachments/assets/fd15d691-b345-4e54-8fdc-7ebb8779886d" />
+
+
+Visualise branches and logs
+---
+
+The diagram shows how a merge commit would look - so the main branch has a added branch where the feature is created/tested then there is a initial commit to make that feature added on to the main branch.
+
+Some commands to visualise git logs 
+
+<img width="1506" height="865" alt="image" src="https://github.com/user-attachments/assets/b319d9ea-75f1-42c5-b984-83e93fad1cf3" />
+
+
+Rebase, stach, cherry pick
+---
+
+THese three tools are more advanced tools in git that give you more control of your git history
+
+Rebase vs Merge - Merge is a safe and friendly way of bringing two branches together, and preserves the history and adds a merge commit to see where the branch is joined
+
+Merge is great of 
+
+Whereas Rebase is more advanced and surgical as it rewrites your git history to make it look like the branch was always built off the latest commit - this gives a cleaner timeline with no merge commits and is good for cleaning up your brand before opening Pull Requests.
+
+Merge is better for working with others and you want collaboration and you dont face many issues, you use merge here - better for shared team workflows 
+
+Rebase on other hand is better to use when your pushing the branch up for a Pull Request so that the git history looks cleaner before anyone else sees it 
+
+DO NOT rebase shared branches as rewriting the history that others are already using can break stuff 
+
+Merge keeps history - Rebase rewrites them 
+
+
+Git stash 
+---
+
+This comes to play when your in the middle of making changes in a branch and you need to move to another branch however you are not ready to commit. This is where git stash comes in to play.
+
+Git stash hides away all your uncommited changes 
+
+Git stash list - shows all your stashes or any work you've stashed away.
+
+Git stash apply - it reapplies the latest hash but keep it in the list - great for reusing certain work in another branch 
+
+Git stash pop - reapplies the stash and deletes it from the stash - so when you no longer need that stash use this instead of keeping it around.
+
+<img width="1003" height="500" alt="image" src="https://github.com/user-attachments/assets/c97afe32-3eb7-435c-9dec-d08bf82af2f7" />
+
+
+Reset, Revert and Cherry-pick
+---
+
+Git revert is the more safer one out of the bunch - it creates a brand new commit that undo the affects of a previous one but it doesnt mess with the history so its fine to use in shared branches.
+
+git reset literally moves the branch pointer backwards meaning it doesn't look at the most recent commit. The soft keeps the changes although the pointer is moved back. The mixed moves the pointer and unstages your changes. The hard basically nukes everything (removes your changes completely) and this should be used with care. - good locally but dangerous in shared branches as it rewrites history
+
+git cherry-pick this lets you take a certain commit from another branch somewhere else and apply it to your current one - this is useful for hot fixes or targetted changes. 
+
+***Summary*** 
+You want to use revert when you want to undo stuff safely on a shared branch. Then you use a reset when you want to move back in history locally.
+
+Finally cherry-pick is best used when you want to copy a certain commit from somewhere else without having to marge a that whole branch. 
