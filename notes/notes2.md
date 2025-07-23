@@ -60,3 +60,30 @@ One change per commit - Basically keep a commit or each change or bug that is be
 
 Avoid noisy merges and chaos names - Nobody wants to see names like fixfixfix or fixfinalfinal2. Also, any merge branch into main into main, into stage into final. - keep it clean 
 
+
+Pre commit and automation 
+---
+
+Pre commit and automation comes in when you've written some code and its messy
+
+Pre-commit is a very common tool that is used for this. Also Huskey for JavaScript and TFLint, TFSec for terraform security. These tools hook into your git so they run automatically before the code is commmited.
+
+They work by, saving your file, git add, git commit, and then boom. The checks run in the background before anything hits the repo. These checks stop any broken code or potential bugs being added into the commit
+
+Hokking these on to your CI pipelines, is a good devops practice and makes life much easier for you later on
+
+
+Mistakes to look out for
+---
+Forgetting to pull before push - Always pull first to stay in sync or git will slap you with a rejection
+
+Force pushing to shared branches - Doing git push --force is dangerous as its basically editing a group work without telling anyone - this can cause other team members commits to break 
+
+Committing secrets (AWS keys, env files, private credentials, API keys) - Use gitignore, pre-commit hooks and tools like git secrets or trufflehog.
+
+Merging without code review - THere should be branch protection in place but its important to review what is being merged to a main branch or any branch 
+
+Not using gitignore properly - You don't want to commit 5gb of node modules and OS files are important. Adding these to .gitignore is important 
+
+<img width="954" height="375" alt="image" src="https://github.com/user-attachments/assets/552cf2a4-af20-4f28-a7c7-8897b287d5ec" />
+
