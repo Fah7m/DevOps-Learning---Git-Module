@@ -87,3 +87,43 @@ Not using gitignore properly - You don't want to commit 5gb of node modules and 
 
 <img width="954" height="375" alt="image" src="https://github.com/user-attachments/assets/552cf2a4-af20-4f28-a7c7-8897b287d5ec" />
 
+
+Git at scale
+---
+
+Mono repos - instead of having microservice repo's or one repo per service, teams sometimes dump everything into one repo - The benefit of this is that it will simplify things such as dependencies and and shared tooling but make things like ci/cd pipelines much harder. 
+
+To deal with those cons, something called selective builds are used - tools like turborepo, nx and bazel only run tests on the part of the repo that's changed so the entire repo isn't tested. 
+
+There is also something called Spare Checkout which basically grabs the subfolders you're working on - this is useful when the full repo is very large (gigabytes) and you only want to close the bit you need.
+
+There are tools like GIT lFS (Large file storage) to store huge media assests - It replaces the big files with pointers and fetches the actual content separately. 
+
+Git filter repo cleans up the history and strips any secrets or removes folders from old commits
+
+Git isn't just for storing app code anymore, when you have GitOps, your infastruction gets version control too. Tools like argo CD or flux, they monitor Git and rollout changes automatically - THese are like Ci/CD but for your kubernetes clusters. 
+
+In summary git doesnt break at scale but how you ise it has to be mature - the same git more smarter and native workflows. 
+
+
+Git security and secrets hygiene
+---
+
+Committing secrets to git is a fast track method to getting fired as there are bots scanning public repos every minute. 
+
+Tools like git secret, trufflehog and even gitignore basics help with this as they act like security guards that scan your code before you commit and they notify you if there is something of concern.
+
+If you've committed a secret to git, its best to clean your git history using tools like git-filter-repo, BFG repo-cleaner and even just renew your secrets as soon as possible.
+
+Steps to take - you find out you commited secrets > renew your secret > revoke it > move on
+
+Deleting just the file you commit is nout enough as the secret is sitting there in the older commits so best to take care of that as well. 
+
+Another good tip is to audit your git logs to have a look at who made what changes - there are bots that can assist with this to tell you if something sketchy has been commited.
+
+
+Connecting to GIt
+---
+
+<img width="1662" height="743" alt="image" src="https://github.com/user-attachments/assets/bae21944-d630-4cde-b447-88c21f9d5cf7" />
+
