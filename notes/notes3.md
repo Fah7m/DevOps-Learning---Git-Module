@@ -57,6 +57,24 @@ git checkout -b branchname - to create a branch
 git checkout main - to switch to a branch
 ```
 
+
+**Workflow to follow when adding, committing and push is this** 
+```
+touch app.txt
+
+git status - to check the status of the file
+
+git add app.txt - this will add the app.txt to staging area
+
+git status - this again to check if its there
+
+git commit -m "commit message" - this will commit it before the final step
+
+git push - this pushes the file onto your github repo.
+```
+
+
+
 This will allow you to merge branches 
 ```
 git merge branchname2
@@ -125,21 +143,6 @@ git log --oneline
 This command will show everything that's happened and you can also recover commits from here
 ```
 git reflog
-```
-
-**Workflow to follow when adding, committing and push is this** 
-```
-touch app.txt
-
-git status - to check the status of the file
-
-git add app.txt - this will add the app.txt to staging area
-
-git status - this again to check if its there
-
-git commit -m "commit message" - this will commit it before the final step
-
-git push - this pushes the file onto your github repo.
 ```
 
 
