@@ -171,3 +171,74 @@ This can clear the stash list
 ```
 git stash clear
 ```
+
+
+Usage of git rebase - this can be used to squash multiple commits into one commit to make the history look better e.g. I make a change to a file and add in 2 extra lines but for each line added, I did 2 whole commits. We can merge this to one commit for housekeeping. 
+
+Here we first added a new branch called **feature-rebase** and added a file called changes.txt - we then added it to staging and commited.
+
+<img width="1054" height="309" alt="image" src="https://github.com/user-attachments/assets/dcd37d86-467c-4f28-b7f6-4077fba1c285" />
+
+We then wanted to make some changes to the file again and added it to staging then commited.
+
+<img width="932" height="582" alt="image" src="https://github.com/user-attachments/assets/2e0b4b5e-65fa-41d9-b5f7-18831aaaee83" />
+
+We can now see in the **git log --online** that there are 3 separate commits
+
+<img width="770" height="136" alt="image" src="https://github.com/user-attachments/assets/6e8533f8-a7dd-4b0c-a9e7-33129725ba18" />
+
+Here we run **git rebase -i HEAD~3 to combine the last 3 commits into one. - We then change the last 2 commits to squash to combine it
+
+<img width="1915" height="982" alt="image" src="https://github.com/user-attachments/assets/0a6866e3-5c30-4923-a9f6-d471b401ffb3" />
+
+And here we add a message for the commit message 
+
+<img width="1793" height="916" alt="image" src="https://github.com/user-attachments/assets/2396ce96-7da3-4ab3-b1d9-13906c5be9db" />
+
+Finally we can see here that the last 3 commits are combined into one with the new commit message. 
+
+<img width="1106" height="108" alt="image" src="https://github.com/user-attachments/assets/0fa34918-d3eb-4a13-be33-d5eb615292ba" />
+
+Then a **git push --set-upstream origin feature-rebase** is done to create the pull request in the repo. - Also we can see the commit history here in github 
+
+<img width="1422" height="191" alt="image" src="https://github.com/user-attachments/assets/79710c1b-fa54-4199-b92d-55a327d17095" />
+
+
+
+**Cherry picking** is very useful when you want to grab a commit from another branch and put it on to main or whatever branch.
+
+Here the branch was added and a file was added to a  commit in that branch.
+
+<img width="1272" height="433" alt="image" src="https://github.com/user-attachments/assets/5f28f19c-3d77-4554-9d44-6fb7247550c6" />
+
+I then copied the commit code from that branch using **git log --oneline**
+
+<img width="1107" height="70" alt="image" src="https://github.com/user-attachments/assets/a6db42e3-14cf-4b57-b908-0a43e8f2053f" />
+
+Finally switched to the main branch so I can **cherry pick** the commit and push it on to that branch.
+
+<img width="934" height="457" alt="image" src="https://github.com/user-attachments/assets/7f3abb44-9ab6-4457-a156-701b67f31b8a" />
+
+
+**git ignore** is very useful for security reasons as we dont wanna push any access keys or env files on to git.
+
+Best thing to do is to create a .gitignore file in your local folder where you work and then in the gitignore, add the files you dont want to be tracked by git such as 
+
+<img width="980" height="91" alt="image" src="https://github.com/user-attachments/assets/477c0ca9-6609-4a85-9182-cc09cba0971c" />
+
+adding node_modules here would be useful too as they take a lot of space.
+
+
+**git commit amend** is useful for making a change to a commit for example the commit message can be changed or add files to the commit 
+
+<img width="837" height="331" alt="image" src="https://github.com/user-attachments/assets/4825197e-6344-432e-9c1a-6bbcbff5dc82" />
+
+
+**git hooks** scrapes that run automatically every time a particular event occurs in a repo. - they check whats allowed in based on what the .pre-commit-config.yaml file has in it e.g. there could be requirements in that yaml file for terraform files to have the correct formating or for txt files to have an extra line at the end.
+
+In my yaml file I have added some basic text formatting so it can tell me if something is wrong. 
+
+Here we can see what happens when you commit with the .pre-commit-config.yaml setup - it shows the issue and fixes the issue if that is setup in the yaml file.
+
+<img width="895" height="433" alt="image" src="https://github.com/user-attachments/assets/55a99506-5959-4a6c-9208-1a6a67353093" />
+
